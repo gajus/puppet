@@ -1,5 +1,5 @@
 {
-  "name": "phantom-puppet",
+  "name": "puppet",
   "description": "",
   "keywords": [
     "phantom",
@@ -8,11 +8,11 @@
     "high level"
   ],
   "version": "1.0.0",
-  "main": "src/phantom-puppet.js",
+  "main": "src/puppet.js",
   "author": "Gajus Kuizinas <gk@anuary.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gajus/phantom-puppet"
+    "url": "https://github.com/gajus/puppet"
   },
   "license": "BSD-3-Clause",
   "scrips": {

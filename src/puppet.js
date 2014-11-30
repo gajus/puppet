@@ -111,11 +111,45 @@ WebPage = function WebPage (phantomPromise, settings) {
      */
     webPage.open = function (url, settings) {
         return queue(function (resolve) {
-            page.open(url, settings, function () {
-                resolve();
+            page.open(url, settings, function (status) {
+                resolve(status);
             });
         });
-    }
+    };
+
+    /**
+     * Sc
+     */
+    webPage.inject = function (script) {}
+
+    /**
+     * Get page property.
+     */
+    /*webPage.page = function (propertyName, callback) {
+        queue(function (resolve) {
+            page.get(propertyName, function (data) {
+                resolve(data);
+            });
+        });
+
+        return webPage;
+    }*/
+
+    /**
+     * Evaluate fn in a page context.
+     * 
+     * @see https://github.com/sgentle/phantomjs-node/wiki#evaluating-pages
+     * @see http://phantomjs.org/api/webpage/method/evaluate.html
+     * @param {Function} fn Function executed in a page context.
+     * @param {mixed} data Parameter passed to the fn at the time of execution.
+     */
+    webPage.evaluate = function (fn, data) {
+        return queue(function (resolve) {
+            page.evaluate(fn, function (result) {
+                resolve();
+            }, data);
+        });
+    };
 };
 
 /**
@@ -124,7 +158,25 @@ WebPage = function WebPage (phantomPromise, settings) {
 WebPage._bindCallbacks = function (page, ee) {
     var events;
 
-    events = ['alert', 'callback', 'closing', 'confirm', 'consoleMessage', 'error', 'filePicker', 'initialized', 'loadFinished', 'loadStarted', 'navigationRequested', 'pageCreated', 'prompt', 'resourceError', 'resourceRequested', 'resourceTimeout', 'urlChanged'];
+    events = [
+        //'alert',
+        'callback',
+        //'closing',
+        //'confirm',
+        //'consoleMessage',
+        //'error',
+        //'filePicker',
+        //'initialized',
+        //'loadFinished',
+        //'loadStarted',
+        //'navigationRequested',
+        //'pageCreated',
+        //'prompt',
+        //'resourceError',
+        /*'resourceRequested',*/
+        //'resourceTimeout',
+        //'urlChanged'
+    ];
 
     events.forEach(function (eventName) {
         var eventMethodName;
